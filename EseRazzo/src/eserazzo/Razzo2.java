@@ -21,6 +21,7 @@ public class Razzo2 extends Thread{
     }
     
     public void run() {
+        d.waitSem4();
         System.out.println("Secondo razzo partito");
         int nRandom = r.nextInt(1000)+1000;
         try {
@@ -29,6 +30,6 @@ public class Razzo2 extends Thread{
             Logger.getLogger(Razzo2.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("Seconda roccia colpita");
-        d.getArrivoR2().release();
+        d.signalSem3();
     }
 }

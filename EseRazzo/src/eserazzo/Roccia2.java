@@ -21,11 +21,7 @@ public class Roccia2 extends Thread{
     }
     
     public void run() {
-        try {
-            d.getArrivoR2().acquire();
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Roccia2.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        d.waitSem3();
         System.out.println("Inzio distruzione seconda roccia");
         int nRandom = r.nextInt(1000)+1000;
         try {
@@ -34,5 +30,6 @@ public class Roccia2 extends Thread{
             Logger.getLogger(Roccia2.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("Fine distruzione seconda roccia");
+        d.signalSem4();
     }
 }

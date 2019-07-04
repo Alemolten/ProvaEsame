@@ -6,33 +6,71 @@
 package eserazzo;
 import java.util.*;
 import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author CorsiMariano
  */
 public class DatiCondivisi {
-    private Semaphore arrivoR1;
-    private Semaphore arrivoR2;
+    private Semaphore sem1;
+    private Semaphore sem2;
+    private Semaphore sem3;
+    private Semaphore sem4;
     
     public DatiCondivisi() {
-        this.arrivoR1 = new Semaphore(0);
-        this.arrivoR2 = new Semaphore(0);
+        this.sem1 = new Semaphore(0);
+        this.sem2 = new Semaphore(1);
+        this.sem3 = new Semaphore(0);
+        this.sem4 = new Semaphore(1);
     }
     
-    public void setArrivoR1(Semaphore arrivoR1) {
-        this.arrivoR1 = arrivoR1;
+    public void waitSem1() {
+        try {
+            sem1.acquire();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(DatiCondivisi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void setArrivoR2(Semaphore arrivoR2) {
-        this.arrivoR2 = arrivoR2;
+    public void waitSem2() {
+        try {
+            sem2.acquire();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(DatiCondivisi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public Semaphore getArrivoR1() {
-        return this.arrivoR1;
+    public void waitSem3() {
+        try {
+            sem3.acquire();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(DatiCondivisi.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public Semaphore getArrivoR2() {
-        return this.arrivoR2;
+    public void waitSem4() {
+        try {
+            sem4.acquire();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(DatiCondivisi.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void signalSem1() {
+        sem1.release();
+    }
+    
+    public void signalSem2() {
+        sem2.release();
+    }
+    
+    public void signalSem3() {
+        sem3.release();
+    }
+    
+    public void signalSem4() {
+        sem4.release();
     }
 }
